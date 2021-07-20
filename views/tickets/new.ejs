@@ -1,0 +1,22 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/performers/new.css" />
+<%- include('../partials/nav') %>
+
+<main>
+	<h1><%= title %></h1>
+  <p>Please first ensure that the Performer is not in the dropdown
+    <select>
+      <% tickets.forEach(function(ticket) { %>
+        <option><%= ticket.seat %></option>
+      <% }) %>
+    </select>
+  </p>
+  <form id="add-ticket-form" action="/tickets" method="POST">
+    <label>Seat:
+      <input name="seat" required pattern="[A-F][1-9]\d?">
+    </label>
+    <button type="submit">Add Ticket</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

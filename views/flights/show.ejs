@@ -1,0 +1,45 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/show.css" />
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section>
+    <div>Title: </div>
+    <div><%= flight.title %>
+      <a href="/flights/<%= flight._id %>/edit">
+        <button>Edit Flight</button>
+      </a>
+    </div>
+    
+    <div>Airline: </div>
+    <div><%= flight.Airline %></div>
+    <div>Airport: </div>
+    <div><%= flight.Airport %></div>
+    <div>Flight On Time: </div>
+    <div><%= flight.nowShowing ? 'Yes' : 'Nope' %></div>
+		<% // start cast list %>
+    <div>Destination:</div>
+	  <% // end cast list %>
+  </section>
+	<% // add to cast form below this comment %>
+  <form id="add-per-to-cast" action="/movies/<%= movie._id %>/performers" method="POST">
+    <select name="performerId">
+      <%- performers.map(p => 
+        `<option value="${p._id}">${p.name}</option>`
+      ).join('') %>
+    </select>
+    <button type="submit">Add to Cast</button>
+  </form>
+  <h2>Reviews</h2>
+  <form 
+    id="add-destination-form"
+    action="/flights/<%= flight._id %>/destinations"
+    method="POST"
+  >
+    <button type="submit">Add Destination</button>
+  </form>
+</main>
+
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>Flights</title>
+</head>
+<body>
+  <nav> <a href="/flights/new">New Flight</a> <a href="/flights">All Flights</a></nav>
+  <h1>Flight List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Airport</th>
+        <th>FlightNo</th><br>
+        
+        <th>Depart Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach(function(flight){ %>
+        <tr>
+          <td><%= flight.Airline %></td>
+          <td><%= flight.Airport %></td>
+          <td><%= flight.FlightNo %></td>
+          <td><%= flight.Departs %></td>
+          <td><a href="/flights/show<%= flight._id %>">DETAILS</a></td>
+          <td><a href="/tickets/new<%= flight._id %>">Edit Flight</a></td> 
+          <td>
+              <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
+                <button>X</button>
+                
+              </form>
+            </td>
+          </tr>
+        </tr>
+      <% })  %>
+     
+    </tbody>
+  </table>
+</body>
+</html>
