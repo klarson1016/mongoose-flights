@@ -1,44 +1,38 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/flights/show.css" />
 <%- include('../partials/nav') %>
-
 <main>
   <h1><%= title %></h1>
-  <section>
-    <div>Title: </div>
-    <div><%= flight.title %>
-      <a href="/flights/<%= flight._id %>/edit">
-        <button>Edit Flight</button>
-      </a>
-    </div>
-    
-    <div>Airline: </div>
-    <div><%= flight.Airline %></div>
-    <div>Airport: </div>
-    <div><%= flight.Airport %></div>
-    <div>Flight On Time: </div>
-    <div><%= flight.nowShowing ? 'Yes' : 'Nope' %></div>
-		<% // start cast list %>
-    <div>Destination:</div>
-	  <% // end cast list %>
+  <section>    
+    <div>Airline: <%= flight.Airline %></div>
+    <div>Airport: <%= flight.Airport %></div>
+		<div>Flight Number: <%= flight.FlightNo %></div>
+    <div>Departs: <%= flight.Departs %></div>
+    <br>  
+    <h2>Available Tickets:</h2>
+    <% if (flight.Tickets.length) { %>
+      <% flight.Tickets.forEach(ticket => { %>
+          <div>Seat Number: <%= ticket.Seat %></div>
+          <div>Price: <%= ticket.Price %></div>
+          <br>
+      <% }) %>
+    <% } else { %>
+      <h4>No Tickets are available for Flight <%= flight.FlightNo %> </h4>
+      <% } %>
+
+    <br>
+    <form action="/flights/<%= flight._id %>/tickets" method="POST">
+      <h2>Add a New Ticket</h2>
+      <label for="seatNumber">Seat Number:</label>
+      <input type="text" name="seatNumber" required pattern="[A-F][1-9]\d?">
+      <br>
+      <label for="price">Price:</label>
+      <input type="number" min="0" name="price">
+      <br>
+      <button type="submit">Add Ticket!</button>
+    </form>
+
   </section>
-	<% // add to cast form below this comment %>
-  <form id="add-per-to-cast" action="/movies/<%= movie._id %>/performers" method="POST">
-    <select name="performerId">
-      <%- performers.map(p => 
-        `<option value="${p._id}">${p.name}</option>`
-      ).join('') %>
-    </select>
-    <button type="submit">Add to Cast</button>
-  </form>
-  <h2>Reviews</h2>
-  <form 
-    id="add-destination-form"
-    action="/flights/<%= flight._id %>/destinations"
-    method="POST"
-  >
-    <button type="submit">Add Destination</button>
-  </form>
+	
 </main>
 
 

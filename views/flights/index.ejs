@@ -8,7 +8,7 @@
   <title>Flights</title>
 </head>
 <body>
-  <nav> <a href="/flights/new">New Flight</a> <a href="/flights">All Flights</a></nav>
+  <nav> <a href="/flights/new">New Flight</a> <a href="/flights">All Flights</a> <a href="/destinations/new">Add Destination</a></nav>
   <h1>Flight List</h1>
   <table>
     <thead>
@@ -27,8 +27,8 @@
           <td><%= flight.Airport %></td>
           <td><%= flight.FlightNo %></td>
           <td><%= flight.Departs %></td>
-          <td><a href="/flights/show<%= flight._id %>">DETAILS</a></td>
-          <td><a href="/tickets/new<%= flight._id %>">Edit Flight</a></td> 
+          <td><a href="/flights/<%= flight._id %>">Details</a></td>
+          <td><a href="/destinations/new/">Edit Flight</a></td> 
           <td>
               <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
                 <button>X</button>
@@ -37,8 +37,7 @@
             </td>
           </tr>
         </tr>
-      <% })  %>
-     
+      <% })  %> 
     </tbody>
   </table>
 </body>
